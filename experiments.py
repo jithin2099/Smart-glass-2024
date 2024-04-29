@@ -1,5 +1,10 @@
-import os
+from subprocess import call
 
-for i in range 200:
-    f = open("C:\Users\HP\Desktop\New Codings\photo\User.2.1 (" + i +").jpg")
-    
+def call_python_file():
+    call(["python", "recognizer_attempt1.py"])
+
+print("Calling Python File")
+
+call_python_file()
+
+print("Python file has been called")

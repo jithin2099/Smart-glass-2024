@@ -9,7 +9,7 @@ names = names.split("\n")
 id = len(names)
 f.close()
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 cam.set(3, 640) # set video width
 cam.set(4, 480) # set video height
 face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')

@@ -25,8 +25,17 @@ minH = 0.1*cam.get(4)
 
 occurance = 0
 occurance_id = "None"
+occcurance_times = [i for i in range(len(names))]
+id_no = 0
 
-while True:
+print(occcurance_times)
+print(len(names))
+print(range(len(names)))
+for i in range(len(names)):
+    occcurance_times[i] = 0
+print(occcurance_times)
+
+for i in range(100):
     ret, img =cam.read()
     # img = cv2.flip(img, -1) # Flip vertically
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -43,6 +52,7 @@ while True:
         confidence_toprint = 100-confidence
         # Check if confidence is less them 100 ==> "0" is perfect match 
         if (confidence < 100):
+            id_no = id
             id = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
         else:
@@ -55,23 +65,27 @@ while True:
 
 
 
-        if occurance_id == id:
-            occurance += 1
+        if occurance_id == "None":
+            continue
         
         else:
-            occurance = 0
-            occurance_id = id
+            occcurance_times[id_no] += 1
 
-        if occurance > 50 :
-            mainfile.speak(str(id) +" is found in the frame")
-            occurance = 0
     
     cv2.imshow('camera',img) 
     k = cv2.waitKey(10) & 0xff # Press 'ESC' for exiting video
     if k == 27:
         break
+
+max_occurance = max(occcurance_times)
+max_occurance_index = occcurance_times.index(max_occurance)
+
+mainfile.speak(str(names[max_occurance_index]) +" is found in the frame")
+
 # Do a bit of cleanup
 print("\n [INFO] Exiting Program and cleanup stuff")
 cam.release()
 f.close()
 cv2.destroyAllWindows()
+
+os.startfile("C:\\Users\\HP\\Desktop\\New Codings\\Btech main Project\\objectcounter.py")

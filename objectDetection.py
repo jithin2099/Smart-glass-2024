@@ -1,7 +1,8 @@
 import cv2
 import os
+import mainfile
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 thres=0.45
 
 cap.set(3,1280)
@@ -38,7 +39,13 @@ while True:
             print(classNames[classId-1])
 
             if(classNames[classId-1]) == "person":
-                os.startfile("C:\\Users\\HP\\Desktop\\New Codings\\btech main project\\recognizer_attempt1.py")
+
+                mainfile.speak("person was detected in the frame, opening face recognition")
+                # pass
+                cap.release()
+                cv2.destroyAllWindows
+                os.startfile("C:\\Users\\HP\\Desktop\\New Codings\\Btech main Project\\recognizer_attempt2.py")
+
 
 
     cv2.imshow("Output",img)
